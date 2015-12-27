@@ -1,0 +1,233 @@
+> data(mtcars)
+> summary(mtcars)
+      mpg             cyl             disp             hp             drat      
+ Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0   Min.   :2.760  
+ 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5   1st Qu.:3.080  
+ Median :19.20   Median :6.000   Median :196.3   Median :123.0   Median :3.695  
+ Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7   Mean   :3.597  
+ 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0   3rd Qu.:3.920  
+ Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0   Max.   :4.930  
+       wt             qsec             vs               am              gear      
+ Min.   :1.513   Min.   :14.50   Min.   :0.0000   Min.   :0.0000   Min.   :3.000  
+ 1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:3.000  
+ Median :3.325   Median :17.71   Median :0.0000   Median :0.0000   Median :4.000  
+ Mean   :3.217   Mean   :17.85   Mean   :0.4375   Mean   :0.4062   Mean   :3.688  
+ 3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:4.000  
+ Max.   :5.424   Max.   :22.90   Max.   :1.0000   Max.   :1.0000   Max.   :5.000  
+      carb      
+ Min.   :1.000  
+ 1st Qu.:2.000  
+ Median :2.000  
+ Mean   :2.812  
+ 3rd Qu.:4.000  
+ Max.   :8.000  
+> str(mtcars)
+'data.frame':	32 obs. of  11 variables:
+ $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+ $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+ $ disp: num  160 160 108 258 360 ...
+ $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+ $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+ $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+ $ qsec: num  16.5 17 18.6 19.4 17 ...
+ $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+ $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+ $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+ $ carb: num  4 4 1 1 2 1 4 2 2 4 ...
+> colSums(is.na(mtcars))
+ mpg  cyl disp   hp drat   wt qsec   vs   am gear carb 
+   0    0    0    0    0    0    0    0    0    0    0 
+> hist(mtcars$mpg, breaks=10, xlab = "Miles per gallon", main = "Historgram of Miles per gallon of cars", xlim = range(10:35))
+Error in plot.new() : 
+  QuartzBitmap_Output - unable to open file './figures/Plot11.png'
+> 
+> hist(mtcars$mpg, breaks=10, xlab = "Miles per gallon", main = "Historgram of Miles per gallon of cars", xlim = range(10:35))
+Error in plot.new() : 
+  QuartzBitmap_Output - unable to open file './figures/Plot11.png'
+> 
+> hist(mtcars$mpg, breaks=10, xlab = "Miles per gallon", main = "Historgram of Miles per gallon of cars", xlim = range(10:35))
+Error in plot.new() : 
+  QuartzBitmap_Output - unable to open file './figures/Plot11.png'
+> 
+> pp <- cor(mtcars)
+> pp[1,]
+       mpg        cyl       disp         hp       drat         wt       qsec         vs         am 
+ 1.0000000 -0.8521620 -0.8475514 -0.7761684  0.6811719 -0.8676594  0.4186840  0.6640389  0.5998324 
+      gear       carb 
+ 0.4802848 -0.5509251 
+> pp[2,]
+       mpg        cyl       disp         hp       drat         wt       qsec         vs         am 
+-0.8521620  1.0000000  0.9020329  0.8324475 -0.6999381  0.7824958 -0.5912421 -0.8108118 -0.5226070 
+      gear       carb 
+-0.4926866  0.5269883 
+> pp[4,]
+       mpg        cyl       disp         hp       drat         wt       qsec         vs         am 
+-0.7761684  0.8324475  0.7909486  1.0000000 -0.4487591  0.6587479 -0.7082234 -0.7230967 -0.2432043 
+      gear       carb 
+-0.1257043  0.7498125 
+> library(ggplot2)
+> data(mtcars)
+> attach(mtcars)
+The following object is masked from package:ggplot2:
+
+    mpg
+> mtcars$amf[am==0]='AUT'
+> mtcars$amf[am==1]='MAN'
+> print(qplot(x=wt, y=mpg, colour=am, facets=.~amf, data=mtcars,main="MpG vs. Weight/Gearing"))
+Error in grid.newpage() : 
+  QuartzBitmap_Output - unable to open file './figures/Plot11.png'
+> mtcars$amf[am==0]='AUT'
+> mtcars$amf[am==1]='MAN'
+> print(qplot(x=wt, y=mpg, colour=am, facets=.~amf, data=mtcars,main="MpG vs. Weight/Gearing"))
+Error in grid.newpage() : 
+  QuartzBitmap_Output - unable to open file './figures/Plot11.png'
+> fit<-glm(mpg~as.factor(cyl) + as.factor(vs) + as.factor(am) + as.factor(gear) + as.factor(carb) + disp + hp + drat + wt + qsec, data=mtcars)
+> library(MASS)
+> step <- stepAIC(fit, direction="both")
+Start:  AIC=169.22
+mpg ~ as.factor(cyl) + as.factor(vs) + as.factor(am) + as.factor(gear) + 
+    as.factor(carb) + disp + hp + drat + wt + qsec
+
+                  Df Deviance    AIC
+- as.factor(carb)  5   134.00 162.64
+- as.factor(gear)  2   124.38 166.25
+- as.factor(am)    1   121.55 167.52
+- qsec             1   121.64 167.54
+- drat             1   122.22 167.70
+- as.factor(cyl)   2   131.33 168.00
+- as.factor(vs)    1   124.03 168.17
+<none>                 120.40 169.22
+- disp             1   130.37 169.76
+- wt               1   145.96 173.37
+- hp               1   146.07 173.40
+
+Step:  AIC=162.64
+mpg ~ as.factor(cyl) + as.factor(vs) + as.factor(am) + as.factor(gear) + 
+    disp + hp + drat + wt + qsec
+
+                  Df Deviance    AIC
+- as.factor(gear)  2   139.02 159.82
+- disp             1   135.00 160.88
+- drat             1   135.19 160.92
+- as.factor(vs)    1   137.68 161.51
+- as.factor(cyl)   2   146.57 161.51
+- qsec             1   139.26 161.87
+<none>                 134.00 162.64
+- as.factor(am)    1   145.93 163.37
+- wt               1   153.80 165.05
+- hp               1   156.79 165.67
++ as.factor(carb)  5   120.40 169.22
+
+Step:  AIC=159.82
+mpg ~ as.factor(cyl) + as.factor(vs) + as.factor(am) + disp + 
+    hp + drat + wt + qsec
+
+                  Df Deviance    AIC
+- drat             1   139.99 158.04
+- as.factor(cyl)   2   149.45 158.13
+- disp             1   140.57 158.17
+- as.factor(vs)    1   141.21 158.32
+- qsec             1   142.66 158.64
+<none>                 139.02 159.82
+- as.factor(am)    1   155.59 161.42
+- hp               1   157.20 161.75
++ as.factor(gear)  2   134.00 162.64
+- wt               1   170.21 164.29
++ as.factor(carb)  5   124.38 166.25
+
+Step:  AIC=158.04
+mpg ~ as.factor(cyl) + as.factor(vs) + as.factor(am) + disp + 
+    hp + wt + qsec
+
+                  Df Deviance    AIC
+- disp             1   141.24 156.32
+- as.factor(vs)    1   142.33 156.57
+- as.factor(cyl)   2   152.32 156.74
+- qsec             1   143.09 156.74
+<none>                 139.99 158.04
++ drat             1   139.02 159.82
+- hp               1   157.73 159.86
+- as.factor(am)    1   159.46 160.21
++ as.factor(gear)  2   135.19 160.92
+- wt               1   170.71 162.39
++ as.factor(carb)  5   126.94 164.91
+
+Step:  AIC=156.32
+mpg ~ as.factor(cyl) + as.factor(vs) + as.factor(am) + hp + wt + 
+    qsec
+
+                  Df Deviance    AIC
+- qsec             1   143.68 154.87
+- as.factor(vs)    1   143.98 154.94
+- as.factor(cyl)   2   159.82 156.28
+<none>                 141.24 156.32
++ disp             1   139.99 158.04
++ drat             1   140.57 158.17
+- hp               1   159.42 158.20
+- as.factor(am)    1   160.12 158.34
++ as.factor(gear)  2   136.55 159.24
+- wt               1   180.88 162.24
++ as.factor(carb)  5   138.91 165.79
+
+Step:  AIC=154.87
+mpg ~ as.factor(cyl) + as.factor(vs) + as.factor(am) + hp + wt
+
+                  Df Deviance    AIC
+- as.factor(vs)    1   151.03 154.47
+<none>                 143.68 154.87
+- as.factor(cyl)   2   168.96 156.06
++ qsec             1   141.24 156.32
+- as.factor(am)    1   160.12 156.34
++ disp             1   143.09 156.74
++ drat             1   143.35 156.80
++ as.factor(gear)  2   140.24 158.10
+- hp               1   180.02 160.09
+- wt               1   184.77 160.92
++ as.factor(carb)  5   140.20 164.09
+
+Step:  AIC=154.47
+mpg ~ as.factor(cyl) + as.factor(am) + hp + wt
+
+                  Df Deviance    AIC
+<none>                 151.03 154.47
+- as.factor(am)    1   160.78 154.47
++ as.factor(vs)    1   143.68 154.87
++ qsec             1   143.98 154.94
+- as.factor(cyl)   2   180.29 156.13
++ disp             1   150.41 156.34
++ drat             1   150.81 156.42
++ as.factor(gear)  2   149.66 158.18
+- hp               1   182.97 158.61
+- wt               1   197.20 161.00
++ as.factor(carb)  5   145.39 163.25
+> step$anova
+Stepwise Model Path 
+Analysis of Deviance Table
+
+Initial Model:
+mpg ~ as.factor(cyl) + as.factor(vs) + as.factor(am) + as.factor(gear) + 
+    as.factor(carb) + disp + hp + drat + wt + qsec
+
+Final Model:
+mpg ~ as.factor(cyl) + as.factor(am) + hp + wt
+
+
+               Step Df   Deviance Resid. Df Resid. Dev      AIC
+1                                        15   120.4027 169.2155
+2 - as.factor(carb)  5 13.5988573        20   134.0015 162.6398
+3 - as.factor(gear)  2  5.0215145        22   139.0230 159.8170
+4            - drat  1  0.9672159        23   139.9903 158.0388
+5            - disp  1  1.2473996        24   141.2377 156.3227
+6            - qsec  1  2.4420033        25   143.6797 154.8713
+7   - as.factor(vs)  1  7.3459298        26   151.0256 154.4669
+> plot(hp, mpg, pch=am,col=259,bg=7,
++      xlab="Horsepower", cex=1.2,
++      ylab="Miles per gallon", main="MpG vs. HP /Gearing")
+Error in plot.new() : 
+  QuartzBitmap_Output - unable to open file './figures/Plot11.png'
+> legend("topright", c("AUT","MAN"), pch=c(0,1))
+Error in strwidth(legend, units = "user", cex = cex, font = text.font) : 
+  plot.new has not been called yet
+> fit2<-glm(mpg ~ as.factor(cyl) + as.factor(am) + hp + wt, data=mtcars)
+> layout(matrix(c(1,2,3,4),2,2)) 
+> plot(fit2)
